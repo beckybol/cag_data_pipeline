@@ -27,6 +27,11 @@ for variable_name, file_path in files.items():
     # If the first column is Date, we set index_col=0
     df = pd.read_csv(file_path)
     
+    # Drop rows where all state columns (everything except 'time') are NaN/null.
+    # This automatically strips out trailing future months (like Jul-Dec of the current year).
+    state_cols = [col for col in df.columns if col != 'time']
+    df = df.dropna(subset=state_cols, how='all')
+    
     # 3. "Melt" the data from Wide to Long
     # This turns 50 state columns into one "State" column
     # id_vars should be your Date column. Change 'Date' if your column is named 'YearMonth' or similar.

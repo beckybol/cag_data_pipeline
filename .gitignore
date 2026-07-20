@@ -4,3 +4,5 @@
 __pycache__/
 *.nc
 .venv/
+cag_data_pipeline.code-workspace
+data/climdiv*
